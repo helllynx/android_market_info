@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main">
+
+    <!--&lt;!&ndash; region Fragments &ndash;&gt;-->
+
+    <!--<fragment-->
+    <!--    android:id="@+id/homeFragment"-->
+    <!--    android:name="ru.azur.wechatpos.ui.processing.payment.SelectOperationTypeFragment"-->
+    <!--    android:label="@string/hf_title"-->
+    <!--    tools:layout="@layout/fragment_home" />-->
+
+    <!--<fragment-->
+    <!--    android:id="@+id/transactionFragment"-->
+    <!--    android:name="ru.azur.wechatpos.ui.main.transaction.TransactionsFragment"-->
+    <!--    android:label="@string/tf_title"-->
+    <!--    tools:layout="@layout/fragment_transaction" />-->
+
+    <!--<fragment-->
+    <!--    android:id="@+id/settingsFragment"-->
+    <!--    android:name="ru.azur.wechatpos.ui.main.settings.SettingsFragment"-->
+    <!--    android:label="@string/sf_title"-->
+    <!--    tools:layout="@layout/fragment_settings" />-->
+
+    <!--&lt;!&ndash; endregion &ndash;&gt;-->
+
+    <!--&lt;!&ndash; region Global actions &ndash;&gt;-->
+
+    <!--<action-->
+    <!--    android:id="@+id/action_global_home"-->
+    <!--    app:destination="@id/homeFragment"-->
+    <!--    app:popUpTo="@id/main" />-->
+
+    <!--<action-->
+    <!--    android:id="@+id/action_global_transaction"-->
+    <!--    app:destination="@id/transactionFragment"-->
+    <!--    app:popUpTo="@id/main" />-->
+
+    <!--<action-->
+    <!--    android:id="@+id/action_global_settings"-->
+    <!--    app:destination="@id/settingsFragment"-->
+    <!--    app:popUpTo="@id/main" />-->
+
+    <!--&lt;!&ndash; endregion &ndash;&gt;-->
+
+</navigation>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="primary">#5A96FF</color>
+    <color name="on_primary">#ffffff</color>
+    <color name="primary_variant">@color/primary</color>
+
+    <color name="secondary">#5A96FF</color>
+    <color name="on_secondary">#ffffff</color>
+    <color name="secondary_variant">#F58735</color>
+
+    <color name="background">#f6f6fb</color>
+    <color name="on_background">#454545</color>
+
+    <color name="surface">#ffffff</color>
+    <color name="on_surface">#323232</color>
+
+    <color name="error">#f44848</color>
+    <color name="on_error">#ffffff</color>
+
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#727272</color>
+    <color name="divider">#f6f5fa</color>
+
+    <color name="ic_launcher_background">@color/primary</color>
+    <color name="splash_background">@color/primary</color>
+    <color name="menu">@color/on_primary</color>
+
+    <color name="success">@color/secondary</color>
+    <color name="waiting">@color/secondary_variant</color>
+
+    <color name="preference_icon">@color/secondary_text</color>
+
+    <!-- region Views -->
+
+    <color name="strokes">#dadbe0</color>
+
+    <color name="spinner_stroke">@color/strokes</color>
+    <color name="spinner_arrow">#323232</color>
+
+    <color name="edit_text_stroke">@color/strokes</color>
+
+    <color name="segmented_button_group_stroke">@color/strokes</color>
+
+    <!-- endregion -->
+
+</resources>

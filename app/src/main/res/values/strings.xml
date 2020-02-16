@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Market Stat</string>
+
+    <string name="ma_tab_fonds">Fonds</string>
+    <string name="ma_tab_crypto">Crypto</string>
+    <string name="ma_tab_forex">Forex</string>
+
+</resources>

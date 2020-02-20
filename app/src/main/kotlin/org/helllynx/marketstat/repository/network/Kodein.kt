@@ -5,6 +5,7 @@ import kotlinx.serialization.json.JsonConfiguration
 import okhttp3.MediaType
 import okhttp3.OkHttpClient
 import org.helllynx.marketstat.repository.network.finnhub.FinnHubNetwork
+import org.helllynx.marketstat.repository.network.finnhub.api.FinnHubApi
 import org.helllynx.marketstat.repository.network.serializer.asConverterFactory
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
@@ -24,13 +25,13 @@ internal fun networkKodein(okHttpBuilder: (OkHttpClient.Builder) -> Unit = {}) =
             .client(
                 OkHttpClient.Builder()
                     .readTimeout(30, TimeUnit.SECONDS)
-                    .apply(okHttpBuilder)
                     .addInterceptor(network.interceptor)
+                    .apply(okHttpBuilder)
                     .build()
             )
             .addConverterFactory(instance<Json>().asConverterFactory(MediaType.get("application/json; charset=utf-8")))
             .build()
-            .create(MarketInterface::class.java)
+            .create(FinnHubApi::class.java)
     }
 
     bind<MarketInterface>() with multiton { network: Network ->

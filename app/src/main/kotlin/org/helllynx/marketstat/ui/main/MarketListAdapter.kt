@@ -1,12 +1,8 @@
 package org.helllynx.marketstat.ui.main
 
-import android.content.Context
-import android.graphics.drawable.Drawable
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import org.helllynx.marketstat.R
 import org.helllynx.marketstat.repository.MarketDataRepository
-import org.helllynx.marketstat.utils.getColorCompat
 
 class MarketListAdapter(private val expandable: Boolean, private val isPrintButtonVisible: Boolean) :
     RecyclerView.Adapter<MarketListAdapter.ItemViewHolder>() {
@@ -47,15 +43,17 @@ class MarketListAdapter(private val expandable: Boolean, private val isPrintButt
 
         transactions[position].let { marketData ->
             holder.card.run {
-                drawable = getDrawable(holder.itemView.context, marketData.confirmed)
+                holder.card.amount = marketData.quote.currentPrice.toString()
+                holder.card.status = marketData.symbol.symbol
+                //drawable = getDrawable(holder.itemView.context, marketData.confirmed)
 
             }
         }
     }
 
-    private fun getDrawable(context: Context, confirmed: Boolean = true): Drawable? =
-        if (confirmed) setTint(context.getColorCompat(R.color.success))
-        else getDrawable(context, R.drawable.ic_waiting)?.apply { setTint(context.getColorCompat(R.color.waiting)) }
+    //private fun getDrawable(context: Context, confirmed: Boolean = true): Drawable? =
+    //    if (confirmed) setTint(context.getColorCompat(R.color.success))
+    //    else getDrawable(context, R.drawable.ic_waiting)?.apply { setTint(context.getColorCompat(R.color.waiting)) }
 
     class ItemViewHolder(val card: MarketDataCard) : RecyclerView.ViewHolder(card)
 }

@@ -2,6 +2,7 @@ package org.helllynx.marketstat.repository
 
 import android.app.Application
 import okhttp3.OkHttpClient
+import org.helllynx.marketstat.repository.network.Network
 import org.helllynx.marketstat.repository.network.networkKodein
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
@@ -17,7 +18,6 @@ fun repositoryModule(
 ) = Kodein.Module(name = "RepositoryModule") {
     val net = networkKodein(okHttpBuilder)
     bind() from singleton(ref = weakReference) {
-        MarketDataRepository(net.instance())
+        MarketDataRepository(net.instance(arg = Network.FinnHubNetwork))
     }
-
 }

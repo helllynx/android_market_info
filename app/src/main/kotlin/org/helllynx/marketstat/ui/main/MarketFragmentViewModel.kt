@@ -2,6 +2,8 @@ package org.helllynx.marketstat.ui.main
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.liveData
+import kotlinx.coroutines.flow.collect
 import org.helllynx.marketstat.repository.MarketDataRepository
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -20,5 +22,9 @@ class MarketFragmentViewModel(application: Application) : AndroidViewModel(appli
     //    networkIds.map { tokenRepository.getByNetworkIdLiveData(it) }
     //}.flatten().map { tokens -> tokens.flatten().associateBy { it.id } }
     //
-    //val transactions = selectedNetworksIds.switchMap { transactionsRepository.getTransactionsLiveData(it) }
+    val transactions = liveData {
+        networkRepository.getTicksAllSymbols().collect {
+            emit(it)
+        }
+    }
 }

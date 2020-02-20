@@ -1,11 +1,8 @@
 package org.helllynx.marketstat.repository
 
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.launch
 import org.helllynx.marketstat.entity.Quote
 import org.helllynx.marketstat.entity.Symbol
 import org.helllynx.marketstat.repository.network.MarketInterface
@@ -19,16 +16,23 @@ class MarketDataRepository(
     lateinit var symbols: List<Symbol>
 
     init {
-        GlobalScope.launch(Dispatchers.IO) {
-            symbols = api.getSymbols()
-        }
+        //GlobalScope.launch(Dispatchers.IO) {
+        //    symbols = api.getSymbols()
+        //}
+
+        symbols = listOf(
+            Symbol("AAPL", "", ""),
+            Symbol("TSLA", "", ""),
+            Symbol("NVDA", "", ""),
+            Symbol("AMD", "", "")
+        )
     }
 
-    suspend fun getTicksAllSymbols(): Flow<MarketData> = flow {
+    suspend fun getTicksAllSymbols(): Flow<List<MarketData>> = flow {
         while (true) {
-            api.getSymbols().map {
-                emit(MarketData(it, api.getQuote(it.symbol)))
-            }
+            emit(symbols.map {
+                MarketData(it, api.getQuote(it.symbol))
+            }.toList())
             delay(GET_DATA_DELAY)
         }
 

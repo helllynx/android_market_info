@@ -4,6 +4,8 @@ plugins {
     id("com.android.application")
     kotlin("android")
     kotlin("kapt")
+    id("kotlinx-serialization")
+    id("de.mannodermaus.android-junit5")
     //id("androidx.navigation.safeargs.kotlin")
 }
 
@@ -19,6 +21,10 @@ android {
         targetSdkVersion(29)
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunnerArgument(
+            "runnerBuilder",
+            "de.mannodermaus.junit5.AndroidJUnit5Builder"
+        )
 
         setProperty("archivesBaseName", "${rootProject.name}-$versionName")
     }
@@ -132,6 +138,16 @@ dependencies {
     implementation("androidx.recyclerview:recyclerview:1.1.0")
     implementation("androidx.constraintlayout:constraintlayout:1.1.3")
     implementation("com.google.android.material:material:1.2.0-alpha04")
+    // endregion
+
+    // region Tests
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.0")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.6.0")
+
+    androidTestImplementation("androidx.test:runner:1.2.0")
+    androidTestImplementation("org.junit.jupiter:junit-jupiter-api:5.6.0")
+    androidTestImplementation("de.mannodermaus.junit5:android-test-core:1.2.0")
+    androidTestRuntimeOnly("de.mannodermaus.junit5:android-test-runner:1.2.0")
     // endregion
 
 }

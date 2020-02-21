@@ -90,8 +90,8 @@ android {
     }
 
     packagingOptions {
-        // Needs to resolve conflict with using JUnit5
-//        exclude("META-INF/LICENSE*")
+        //Needs to resolve conflict with using JUnit5
+        exclude("META-INF/LICENSE*")
     }
 
     sourceSets {
@@ -138,6 +138,7 @@ dependencies {
     implementation("androidx.recyclerview:recyclerview:1.1.0")
     implementation("androidx.constraintlayout:constraintlayout:1.1.3")
     implementation("com.google.android.material:material:1.2.0-alpha04")
+    implementation("org.jetbrains.anko:anko-common:0.10.8")
     // endregion
 
     // region Tests

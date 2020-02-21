@@ -1,0 +1,119 @@
+stages:
+  - analysis
+  - test
+  - build
+  - publish
+
+# region Analysis
+
+detekt:
+  stage: analysis
+  tags:
+    - android
+  only:
+    - branches
+    - merge_requests
+  script:
+    - ./gradlew detekt
+  artifacts:
+    when: always
+    paths:
+      - build/reports/detekt/detekt.html
+
+lintDebug:
+  stage: analysis
+  tags:
+    - android
+  only:
+    - develop
+    - merge_requests
+  script:
+    - ./gradlew lintPosDebug lintWalletDebug
+  artifacts:
+    when: always
+    paths:
+      - "*/build/reports/lint-results*.html"
+
+lintRelease:
+  stage: analysis
+  tags:
+    - android
+  only:
+    - master
+    - /release\/.+/
+  script:
+    - ./gradlew lintPosRelease lintWalletRelease
+  artifacts:
+    when: always
+    paths:
+      - "*/build/reports/lint-results*.html"
+
+# endregion
+
+# region Test
+
+unitTest:
+  stage: test
+  tags:
+    - android
+  only:
+    - master
+    - develop
+    - merge_requests
+  script:
+    - ./gradlew test
+  artifacts:
+    when: always
+    paths:
+      - repository/build/reports/tests/
+    reports:
+      junit:
+        - "repository/build/test-results/*/*.xml"
+
+androidTest:
+  stage: test
+  tags:
+    - android-test
+  only:
+    - master
+    - develop
+    - merge_requests
+  script:
+    - ./gradlew connectedAndroidTest
+  artifacts:
+    when: always
+    paths:
+      - repository/build/reports/androidTests
+
+# endregion
+
+# region Build
+
+assembleDebug:
+  stage: build
+  tags:
+    - android
+  only:
+    - develop
+    - merge_requests
+  script:
+    - ./gradlew assembleDebug
+  artifacts:
+    paths:
+      - repository/build/outputs/aar/*-debug.aar
+    expire_in: 2 weeks
+
+assembleRelease:
+  stage: build
+  tags:
+    - android
+  only:
+    - master
+    - /release\/.+/
+  script:
+    - ./gradlew assembleRelease
+  artifacts:
+    paths:
+      - repository/build/outputs/aar/*-release.aar
+
+# endregion

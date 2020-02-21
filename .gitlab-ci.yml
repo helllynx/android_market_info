@@ -1,45 +1,6 @@
 stages:
-  - analysis
   - test
   - build
-
-# region Analysis
-
-detekt:
-  stage: analysis
-  tags:
-    - android
-  only:
-    - branches
-    - merge_requests
-  script:
-    - ./gradlew detekt
-  artifacts:
-    when: always
-    paths:
-      - build/reports/detekt/detekt.html
-
-lintDebug:
-  stage: analysis
-  tags:
-    - android
-  only:
-    - develop
-    - merge_requests
-  script:
-    - ./gradlew lintPosDebug lintWalletDebug
-
-lintRelease:
-  stage: analysis
-  tags:
-    - android
-  only:
-    - master
-    - /release\/.+/
-  script:
-    - ./gradlew lintPosRelease lintWalletRelease
-
-# endregion
 
 # region Test
 

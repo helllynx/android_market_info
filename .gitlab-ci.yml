@@ -2,7 +2,6 @@ stages:
   - analysis
   - test
   - build
-  - publish
 
 # region Analysis
 
@@ -29,10 +28,6 @@ lintDebug:
     - merge_requests
   script:
     - ./gradlew lintPosDebug lintWalletDebug
-  artifacts:
-    when: always
-    paths:
-      - "*/build/reports/lint-results*.html"
 
 lintRelease:
   stage: analysis
@@ -43,10 +38,6 @@ lintRelease:
     - /release\/.+/
   script:
     - ./gradlew lintPosRelease lintWalletRelease
-  artifacts:
-    when: always
-    paths:
-      - "*/build/reports/lint-results*.html"
 
 # endregion
 
@@ -62,13 +53,6 @@ unitTest:
     - merge_requests
   script:
     - ./gradlew test
-  artifacts:
-    when: always
-    paths:
-      - repository/build/reports/tests/
-    reports:
-      junit:
-        - "repository/build/test-results/*/*.xml"
 
 androidTest:
   stage: test
@@ -80,10 +64,6 @@ androidTest:
     - merge_requests
   script:
     - ./gradlew connectedAndroidTest
-  artifacts:
-    when: always
-    paths:
-      - repository/build/reports/androidTests
 
 # endregion
 
@@ -98,10 +78,6 @@ assembleDebug:
     - merge_requests
   script:
     - ./gradlew assembleDebug
-  artifacts:
-    paths:
-      - repository/build/outputs/aar/*-debug.aar
-    expire_in: 2 weeks
 
 assembleRelease:
   stage: build
@@ -112,8 +88,5 @@ assembleRelease:
     - /release\/.+/
   script:
     - ./gradlew assembleRelease
-  artifacts:
-    paths:
-      - repository/build/outputs/aar/*-release.aar
 
 # endregion
